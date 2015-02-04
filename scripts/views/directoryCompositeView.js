@@ -25,7 +25,7 @@ define([
 		initialize: function() {
 			this.listenTo(this.collection, "change reset add remove", function(model){
 				// fix for loosing value for another edited input
-				if(!model.changed.currentValue){
+				if(model.changed && !model.changed.currentValue){
 					this.render();
 				}
 			});

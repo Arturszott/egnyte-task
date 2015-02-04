@@ -38,6 +38,7 @@ define([
 			this.model.toggleEdit();
 		},
 		onCancelClicked: function(){
+			this.model.set('currentValue', this.model.get('name'));
 			this.model.toggleEdit();
 		}
 	});
