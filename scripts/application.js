@@ -2,41 +2,55 @@ define([
 	'backbone',
 	'communicator',
 	'hbs!tmpl/welcome',
-	'backbone.mock'
-], function(Backbone, Communicator, Welcome_tmpl) {
-	'use strict';
+	'collections/fileList',
+	'views/directoryCompositeView',
 
-	var welcomeTmpl = Welcome_tmpl;
+	'backbone.mock'
+], function(Backbone, Communicator, Welcome_tmpl, FileList, DirectoryCompositeView) {
+	'use strict';
 
 	var App = new Backbone.Marionette.Application();
 
-	App.addRegions({});
+	var fileList = new FileList();
+	var welcomeTmpl = Welcome_tmpl;
+
+	var viewOptions = {
+		collection: fileList
+	};
+
+	var main = new DirectoryCompositeView(viewOptions);
+	var mock = BackboneMock.map({
+		url: '/files',
+		response: [{
+			name: 'Sample',
+			ext: 'txt',
+		}, {
+			name: 'Other',
+			ext: 'doc',
+		}, {
+			name: 'Third',
+			ext: 'jpg',
+		}, {
+			name: 'Fourth',
+			ext: 'js',
+		}]
+	});
+
+	App.addRegions({
+		main: '#main'
+	});
 
 	App.addInitializer(function() {
-		Communicator.mediator.trigger("APP:START");
+		App.main.show(main);
+		console.log(main);
 	});
 
-	var mock = BackboneMock.map({
-		url: '/user',
-		response: {
-			name: 'theDude',
-			age: 20,
-			email: 'theDude@gmail.com'
-		}
-	});
 
+	// TODO remove
 	var User = Backbone.Model.extend({
 		url: '/user'
 	});
 	var user = new User();
-	user.fetch({
-		error: function(model, options, response) {
-			console.log('error fetching model: ', arguments);
-		},
-		success: function(resp, status, xhr) {
-			console.log('success fetching model: ', arguments);
-		}
-	});
 
 	return App;
 });
