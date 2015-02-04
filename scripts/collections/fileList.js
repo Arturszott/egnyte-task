@@ -31,6 +31,11 @@ define([
 				selected: true
 			});
 		},
+		getEdited: function() {
+			return this.where({
+				edited: true
+			});
+		},
 		getUnselected: function() {
 			return this.where({
 				selected: false

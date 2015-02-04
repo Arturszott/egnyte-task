@@ -10,10 +10,12 @@ define([
 			edited: false
 		},
 		setTitle: function(){
-			this.set('title', this.get('name') + '.' + this.get('ext'))
+			this.set('title', this.get('name') + '.' + this.get('ext'));
+
 		},
 		initialize: function() {
 			this.setTitle();
+			this.set('currentValue', this.get('name'));
 			this.on('change:name', this.setTitle);
 		},
 		toggle: function() {

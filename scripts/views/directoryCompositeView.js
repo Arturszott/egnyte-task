@@ -23,7 +23,12 @@ define([
 		},
 
 		initialize: function() {
-			this.listenTo(this.collection, "change reset add remove", this.render);
+			this.listenTo(this.collection, "change reset add remove", function(model){
+				// fix for loosing value for another edited input
+				if(!model.changed.currentValue){
+					this.render();
+				}
+			});
 		},
 
 		onRender: function() {
@@ -38,10 +43,10 @@ define([
 
 			this.ui.toggle.prop('checked', allSelected);
 		},
-		updateToolbar: function(){
-			var $buttons = $el.find('js-rename, .js-delete');
+		updateToolbar: function() {
+			var $buttons = this.$el.find('js-rename, .js-delete');
 
-			if(!this.collection.getSelected()){
+			if (!this.collection.getSelected()) {
 				$buttons.addClass('is-disabled');
 			} else {
 				$buttons.removeClass('is-disabled');
@@ -71,9 +76,6 @@ define([
 			var confirmed = confirm("Are you sure you want to delete the " + selectedModels.length + " selected file" + (selectedModels.length > 1 ? 's' : '') + "?");
 
 			if (confirmed) {
-				// save removed models to fast undo
-				this.lastRemoved = selectedModels;
-
 				this.collection.reset(this.collection.getUnselected());
 			};
 		}
