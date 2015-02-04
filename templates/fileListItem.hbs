@@ -1,16 +1,18 @@
-<input class="toggle" type="checkbox"{{#if selected }} checked {{/if}}>
-{{#if edited }}
-	<input class="item-title-input" value="{{currentValue}}" type="text">
+<span {{#if edited }}class="is-editing"{{/if}}>
+	<input class="toggle" type="checkbox"{{#if selected }} checked {{/if}}>
+	{{#if edited }}
+		<input class="item-title-input" value="{{currentValue}}" type="text">
 
-	{{#if justCreated }}
-		<button class="button js-save">Create</button>
+		{{#if justCreated }}
+			<button class="button button-small js-save">Create</button>
+		{{else}}
+			<span class="item-ext">.{{ext}}</span>
+			<button class="button button-small js-save">Save</button>
+		{{/if}}
+		
+
+		<button class="button button-small button-link js-cancel">Cancel</button>
 	{{else}}
-		<span class="item-ext">.{{ext}}</span>
-		<button class="button js-save">Save</button>
+		<span class="item-title">{{title}}</span>
 	{{/if}}
-	
-
-	<button class="button button-link js-cancel">Cancel</button>
-{{else}}
-	<span class="item-title">{{title}}</span>
-{{/if}}
+</span>

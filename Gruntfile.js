@@ -41,7 +41,7 @@ module.exports = function (grunt) {
                 }
             },
             less: {
-              files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+              files: ['styles/*.less'],
               tasks: ['less']
             },
             /* not used at the moment
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
         less: {
           dist: {
             files: {
-              '<%= yeoman.app %>/styles/main.css': ['styles/main.less']
+              'styles/main.css': ['styles/main.less']
             },
             options: {
               sourceMap: false,

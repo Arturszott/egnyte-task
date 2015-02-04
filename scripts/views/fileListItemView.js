@@ -6,7 +6,7 @@ define([
 
 	return Marionette.ItemView.extend({
 		tagName: 'li',
-
+		className: 'fileList-item',
 		template: listItem_tmpl,
 		ui: {
 			textInput: '.item-title-input'
