@@ -35,11 +35,17 @@ define([
 		},
 		onSaveClicked: function(){
 			this.model.set('name', this.ui.textInput.val());
+			this.model.set('justCreated', false);
 			this.model.toggleEdit();
 		},
 		onCancelClicked: function(){
 			this.model.set('currentValue', this.model.get('name'));
 			this.model.toggleEdit();
+
+			if(this.model.get('justCreated')){
+				this.model.destroy();
+			}
+
 		}
 	});
 });

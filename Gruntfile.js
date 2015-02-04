@@ -231,13 +231,7 @@ module.exports = function (grunt) {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
-    // starts express server with live testing via testserver
     grunt.registerTask('default', function (target) {
-
-        // what is this??
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
-        }
 
         grunt.option('force', true);
 

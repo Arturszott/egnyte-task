@@ -36,9 +36,9 @@ define([
 				edited: true
 			});
 		},
-		getUnselected: function() {
+		getJustCreated: function() {
 			return this.where({
-				selected: false
+				justCreated: true
 			});
 		}
 	});

@@ -10,7 +10,8 @@ define([
 			edited: false
 		},
 		setTitle: function(){
-			this.set('title', this.get('name') + '.' + this.get('ext'));
+
+			this.set('title', this.get('ext') ? this.get('name') + '.' + this.get('ext'): this.get('name'));
 
 		},
 		initialize: function() {
