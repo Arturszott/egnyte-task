@@ -34,13 +34,16 @@ module.exports = function (grunt) {
                     
                     'scripts/{,**/}*.js',
                     'templates/{,**/}*.hbs',
-                    
-                    'test/spec/{,**/}*.js'
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css'
                 ],
                 options: {
                     livereload: true
                 }
-            }
+            },
+            less: {
+              files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+              tasks: ['less']
+            },
             /* not used at the moment
             handlebars: {
                 files: [
@@ -52,7 +55,7 @@ module.exports = function (grunt) {
 
         // testing server
         connect: {
-            testserver: {
+            main: {
                 options: {
                     port: 1234,
                     base: '.'
@@ -60,20 +63,10 @@ module.exports = function (grunt) {
             }
         },
 
-        // mocha command
-        exec: {
-            mocha: {
-                command: 'mocha-phantomjs http://localhost:<%= connect.testserver.options.port %>/test',
-                stdout: true
-            }
-        },
-
-        
-
         // open app and test page
         open: {
             server: {
-                path: 'http://localhost:<%= connect.testserver.options.port %>'
+                path: 'http://localhost:<%= connect.main.options.port %>'
             }
         },
 
@@ -168,6 +161,20 @@ module.exports = function (grunt) {
             }
         },
 
+        less: {
+          dist: {
+            files: {
+              '<%= yeoman.app %>/styles/main.css': ['styles/main.less']
+            },
+            options: {
+              sourceMap: false,
+              sourceMapFilename: '<%= yeoman.app %>/styles/main.css.map',
+              sourceMapBasepath: '<%= yeoman.app %>/',
+              sourceMapRootpath: '/'
+            }
+          }
+        },
+
         htmlmin: {
             dist: {
                 options: {
@@ -237,7 +244,8 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'connect:testserver',
+            'less',
+            'connect:main',
             'open',
             'watch'
         ]);
@@ -249,6 +257,7 @@ module.exports = function (grunt) {
         'compass:dist',
         'useminPrepare',
         'requirejs',
+        'less',
         'imagemin',
         'htmlmin',
         'concat',
