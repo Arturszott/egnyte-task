@@ -1,12 +1,12 @@
 define([
 	'backbone.marionette',
-	'hbs!tmpl/sample',
+	'hbs!tmpl/fileListPanel',
 	'views/fileListItemView'
-], function(Marionette, sample, ItemView) {
+], function(Marionette, fileList_tmpl, ItemView) {
 	'use strict';
 
 	return Marionette.CompositeView.extend({
-		template: sample,
+		template: fileList_tmpl,
 
 		itemView: ItemView,
 
@@ -21,7 +21,7 @@ define([
 		},
 
 		initialize: function() {
-			this.listenTo(this.collection, 'all', this.updateToggleCheckbox, this);
+			this.listenTo(this.collection, "change reset add remove", this.render);
 		},
 
 		onRender: function() {
@@ -40,9 +40,7 @@ define([
 			var isSelected = event.currentTarget.checked;
 
 			this.collection.each(function(item) {
-				item.save({
-					selected: isSelected
-				});
+				item.set('selected', isSelected);
 			});
 		}
 	});

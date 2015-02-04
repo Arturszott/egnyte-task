@@ -17,8 +17,7 @@ require.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'jquery'
-        },
-        'backbone.mock': ['backbone']
+        }
     },
 
     paths: {
@@ -33,7 +32,6 @@ require.config({
 
         /* alias the bootstrap js lib */
         bootstrap: 'vendor/bootstrap',
-        'backbone.mock': 'vendor/backbone.mock',
 
         /* Alias text.js for template loading and shortcut the templates dir to tmpl */
         text: '../bower_components/requirejs-text/text',

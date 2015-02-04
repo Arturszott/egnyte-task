@@ -3,15 +3,15 @@ define([
 	'communicator',
 	'hbs!tmpl/welcome',
 	'collections/fileList',
-	'views/directoryCompositeView',
+	'views/directoryCompositeView'
 
-	'backbone.mock'
 ], function(Backbone, Communicator, Welcome_tmpl, FileList, DirectoryCompositeView) {
 	'use strict';
 
 	var App = new Backbone.Marionette.Application();
 
 	var fileList = new FileList();
+	fileList.fetch();
 	var welcomeTmpl = Welcome_tmpl;
 
 	var viewOptions = {
@@ -19,22 +19,6 @@ define([
 	};
 
 	var main = new DirectoryCompositeView(viewOptions);
-	var mock = BackboneMock.map({
-		url: '/files',
-		response: [{
-			name: 'Sample',
-			ext: 'txt',
-		}, {
-			name: 'Other',
-			ext: 'doc',
-		}, {
-			name: 'Third',
-			ext: 'jpg',
-		}, {
-			name: 'Fourth',
-			ext: 'js',
-		}]
-	});
 
 	App.addRegions({
 		main: '#main'
@@ -42,15 +26,7 @@ define([
 
 	App.addInitializer(function() {
 		App.main.show(main);
-		console.log(main);
 	});
-
-
-	// TODO remove
-	var User = Backbone.Model.extend({
-		url: '/user'
-	});
-	var user = new User();
 
 	return App;
 });

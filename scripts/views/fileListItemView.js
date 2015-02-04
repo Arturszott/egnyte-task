@@ -1,6 +1,6 @@
 define([
 	'backbone.marionette',
-	'hbs!tmpl/sample'
+	'hbs!tmpl/fileListItem'
 ], function(Marionette, sample) {
 	'use strict';
 
@@ -22,7 +22,6 @@ define([
 
 		initialize: function() {
 			this.value = this.model.get('title');
-
 			this.listenTo(this.model, 'change', this.render, this);
 		},
 
@@ -33,7 +32,7 @@ define([
 		},
 
 		toggle: function() {
-			this.model.toggle().save();
+			this.model.toggle();
 		},
 	});
 });

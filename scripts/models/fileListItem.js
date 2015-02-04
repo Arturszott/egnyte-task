@@ -4,15 +4,14 @@ define([
 	'use strict';
 
 	return Backbone.Model.extend({
-		defaults: {
-			name: '',
-			title: function() {
-				return this.get('name') + '.' + this.get('ext');
-			},
+		urlRoot: '/files',
+		defaults : function () {
 			selected: false
 		},
 
-		initialize: function() {},
+		initialize: function() {
+			this.set('title', this.get('name') + '.' + this.get('ext'))
+		},
 
 		toggle: function() {
 			return this.set('selected', !this.get('selected'));
