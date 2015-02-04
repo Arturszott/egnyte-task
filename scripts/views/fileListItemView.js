@@ -1,7 +1,7 @@
 define([
 	'backbone.marionette',
 	'hbs!tmpl/sample'
-], function (Marionette, sample) {
+], function(Marionette, sample) {
 	'use strict';
 
 	return Marionette.ItemView.extend({
@@ -20,19 +20,19 @@ define([
 			'click .destroy': 'destroy',
 		},
 
-		initialize: function () {
+		initialize: function() {
 			this.value = this.model.get('title');
 
 			this.listenTo(this.model, 'change', this.render, this);
 		},
 
-		onRender: function () {},
+		onRender: function() {},
 
-		destroy: function () {
+		destroy: function() {
 			this.model.destroy();
 		},
 
-		toggle: function () {
+		toggle: function() {
 			this.model.toggle().save();
 		},
 	});
