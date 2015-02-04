@@ -1,18 +1,16 @@
 define([
 	'backbone',
-	'communicator',
-	'hbs!tmpl/welcome',
 	'collections/fileList',
 	'views/directoryCompositeView'
 
-], function(Backbone, Communicator, Welcome_tmpl, FileList, DirectoryCompositeView) {
+], function(Backbone, FileList, DirectoryCompositeView) {
 	'use strict';
 
 	var App = new Backbone.Marionette.Application();
 
 	var fileList = new FileList();
+
 	fileList.fetch();
-	var welcomeTmpl = Welcome_tmpl;
 
 	var viewOptions = {
 		collection: fileList

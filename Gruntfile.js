@@ -243,22 +243,11 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            
             'connect:testserver',
-            
             'open',
             'watch'
         ]);
     });
-
-    // todo fix these
-    grunt.registerTask('test', [
-        'clean:server',
-        'createDefaultTemplate',
-        'handlebars',
-        'compass',
-        'connect:testserver',
-    ]);
 
     grunt.registerTask('build', [
         'createDefaultTemplate',
