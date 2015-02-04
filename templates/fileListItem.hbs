@@ -1,2 +1,9 @@
 <input class="toggle" type="checkbox"{{#if selected }} checked {{/if}}>
-<span class="item-title">{{title}}</span>
+{{#if edited }}
+	<input class="item-title-input" value="{{name}}" type="text">
+	<span class="item-ext">.{{ext}}</span>
+	<button class="button js-save">Save</button>
+	<button class="button button-link js-cancel">Cancel</button>
+{{else}}
+	<span class="item-title">{{title}}</span>
+{{/if}}

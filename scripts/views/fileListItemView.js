@@ -1,38 +1,37 @@
 define([
 	'backbone.marionette',
 	'hbs!tmpl/fileListItem'
-], function(Marionette, sample) {
+], function(Marionette, listItem_tmpl) {
 	'use strict';
 
 	return Marionette.ItemView.extend({
 		tagName: 'li',
 
-		template: sample,
-
-		value: '',
-
+		template: listItem_tmpl,
 		ui: {
-			edit: '.edit'
+			textInput: '.item-title-input'
 		},
-
 		events: {
 			'click .toggle': 'toggle',
-			'click .destroy': 'destroy',
+			'click .js-save': 'onSaveClicked',
+			'click .js-cancel': 'onCancelClicked',
 		},
 
 		initialize: function() {
-			this.value = this.model.get('title');
-			this.listenTo(this.model, 'change', this.render, this);
 		},
 
 		onRender: function() {},
 
-		destroy: function() {
-			this.model.destroy();
-		},
-
 		toggle: function() {
 			this.model.toggle();
 		},
+
+		onSaveClicked: function(){
+			this.model.set('name', this.ui.textInput.val())
+			this.model.toggleEdit();
+		},
+		onCancelClicked: function(){
+			this.model.toggleEdit();
+		}
 	});
 });

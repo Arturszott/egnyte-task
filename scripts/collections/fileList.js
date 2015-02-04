@@ -6,10 +6,10 @@ define([
 
 	return Backbone.Collection.extend({
 		model: FileListItem,
-		url: '/files',
 		initialize: function() {},
 		fetch: function() {
-			// fake fetch
+			// fake fetch, should be mocked with external mocking plugin (mockery maybe?)
+			// but the one I've tested was too simple
 			var data = [{
 				name: 'Sample',
 				ext: 'txt',
@@ -29,6 +29,11 @@ define([
 		getSelected: function() {
 			return this.where({
 				selected: true
+			});
+		},
+		getUnselected: function() {
+			return this.where({
+				selected: false
 			});
 		}
 	});
